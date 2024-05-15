@@ -1,0 +1,1937 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Data",
+    "version": "1.10",
+    "description": "With the Data service you can obtain additional data such as vehicle profiles.",
+    "contact": {
+      "url": "https://developer.myptv.com/"
+    }
+  },
+  "tags": [
+    {
+      "name": "Map Information"
+    },
+    {
+      "name": "Vehicle Profiles"
+    },
+    {
+      "name": "Custom Road Attributes"
+    },
+    {
+      "name": "Vehicle Models"
+    }
+  ],
+  "paths": {
+    "/vehicle-profiles/predefined": {
+      "get": {
+        "tags": [
+          "Vehicle Profiles"
+        ],
+        "description": "Returns the predefined vehicle profiles for routing.",
+        "operationId": "getPredefinedVehicleProfiles",
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredefinedVehicleProfiles"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/road-attributes": {
+      "post": {
+        "tags": [
+          "Custom Road Attributes"
+        ],
+        "operationId": "createCustomRoadAttributeScenario",
+        "description": "Create a custom road attribute scenario.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RoadAttributeResultsParameter"
+          },
+          {
+            "$ref": "#/components/parameters/PolylineFormatParameter"
+          }
+        ],
+        "requestBody": {
+          "description": "The roads to be attributed.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomRoadAttributeScenario"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomRoadAttributeScenario"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Custom Road Attributes"
+        ],
+        "operationId": "getAllCustomRoadAttributeScenarios",
+        "description": "Get a list of all custom road attribute scenarios of the current user.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RoadAttributeResultsParameter"
+          },
+          {
+            "$ref": "#/components/parameters/PolylineFormatParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomRoadAttributeScenarioList"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/road-attributes/{scenarioId}": {
+      "get": {
+        "tags": [
+          "Custom Road Attributes"
+        ],
+        "operationId": "getCustomRoadAttributeScenario",
+        "description": "Get a custom road attribute scenario by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ScenarioIdParameter"
+          },
+          {
+            "$ref": "#/components/parameters/RoadAttributeResultsParameter"
+          },
+          {
+            "$ref": "#/components/parameters/PolylineFormatParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomRoadAttributeScenario"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Custom Road Attributes"
+        ],
+        "operationId": "updateCustomRoadAttributeScenario",
+        "description": "Perform a full update of an existing custom road attribute scenario.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ScenarioIdParameter"
+          },
+          {
+            "$ref": "#/components/parameters/RoadAttributeResultsParameter"
+          },
+          {
+            "$ref": "#/components/parameters/PolylineFormatParameter"
+          }
+        ],
+        "requestBody": {
+          "description": "The custom road attribute scenario to be updated.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomRoadAttributeScenario"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomRoadAttributeScenario"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Custom Road Attributes"
+        ],
+        "operationId": "deleteCustomRoadAttributeScenario",
+        "description": "Delete a custom road attribute scenario.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ScenarioIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Response on success."
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roads": {
+      "get": {
+        "tags": [
+          "Custom Road Attributes"
+        ],
+        "operationId": "getRoads",
+        "description": "Get roads from (click) points on a map.",
+        "parameters": [
+          {
+            "name": "points",
+            "in": "query",
+            "required": true,
+            "description": "A point, a polyline or a polygon to select roads.\n\nFor a single point the road closest to this point will be returned. Several points where the first and last \npoint are different will be considered a polyline and all roads intersected by this polyline will be \nreturned. If the polyline is closed, i.e. the first and the last point are the same, the polyline defines \na polygon and all roads whose complete polyline is within the polygon will be returned. A polygon must be \nvalid according to [OGC](https://www.ogc.org/standard/sfa/). Holes within polygons are not supported.\nFerries will not be selected.\n\nFormat: `<point1_lat>,<point1_lon>,...,<pointN_lat>,<pointN_lon>`.\n\nA request will be rejected if it\n* does not contain an even number of coordinates,\n* contains a closed polyline defining an invalid polygon according to OGC,\n* contains invalid coordinates or\n* covers more than 5000 roads.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/PolylineFormatParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoadsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/map-information": {
+      "get": {
+        "tags": [
+          "Map Information"
+        ],
+        "operationId": "getMapInformation",
+        "description": "Gets information about the map. See [here](./concepts/map-information) for more information.",
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapInformationResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vehicle-models": {
+      "get": {
+        "tags": [
+          "Vehicle Models"
+        ],
+        "description": "A list of **VehicleModel** objects. Only vehicle models matching all filters are returned.\nIn case that no vehicle model is found an empty list is returned. In case no filters are applied, all available vehicle models are returned.\n\nThis method is in a preview state, the API is stable, feature changes could be introduced in future.",
+        "operationId": "getVehicleModels",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VehicleIdentificationFilterParameter"
+          },
+          {
+            "$ref": "#/components/parameters/VehicleTypesFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleModels"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/combined-transports": {
+      "get": {
+        "tags": [
+          "Map Information"
+        ],
+        "operationId": "getCombinedTransports",
+        "description": "Get combined transports from a (click) point on a map.\n\nA request will be rejected if \n* it covers more than 5000 combined transports or\n* if the parameter **position** is not specified.",
+        "parameters": [
+          {
+            "name": "position",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "$ref": "#/components/schemas/CombinedTransportByPosition"
+            },
+            "explode": true
+          },
+          {
+            "$ref": "#/components/parameters/PolylineFormatParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response on success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CombinedTransportsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Response on failure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "ScenarioIdParameter": {
+        "name": "scenarioId",
+        "in": "path",
+        "required": true,
+        "description": "The ID of the custom road attribute scenario.",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "RoadAttributeResultsParameter": {
+        "name": "results",
+        "in": "query",
+        "description": "Defines which results will be returned.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RoadAttributesResults"
+          }
+        }
+      },
+      "PolylineFormatParameter": {
+        "name": "polylineFormat",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/PolylineFormat"
+        }
+      },
+      "VehicleTypesFilterParameter": {
+        "name": "vehicleTypes",
+        "in": "query",
+        "explode": false,
+        "description": "A comma-separated list of vehicle types. See **vehicleType** in the response.\nThe following vehicle types are supported.\n\nTractor-like vehicle types:\n* `TRUCK` - Truck. Total permitted weight > 7.5t.\n* `LCV` - Light Commercial Vehicle. Total permitted weight < 7.5t.\n* `SCV` - Small Commercial Vehicle. Total permitted weight < 3.5t.\n\nTrailer-like vehicle types:\n* `TRAILER` - Trailer\n* `SEMI_TRAILER` - Semi-trailer\n* `BODY` - Body\n\nThis list can be extended at any time.",
+        "example": [
+          "TRUCK",
+          "LCV",
+          "SCV"
+        ],
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "[A-Z]+"
+          }
+        }
+      },
+      "VehicleIdentificationFilterParameter": {
+        "name": "identification",
+        "in": "query",
+        "description": "String which must be contained in the vehicle model or the vehicle variant. See **commercial** in the response.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "Vehicle": {
+        "type": "object",
+        "description": "Physical and legal properties of the vehicle such as its dimensions.\n\nThese parameters are not supported for non-motorized profiles such as _BICYCLE_ or _PEDESTRIAN_.\nUnsupported parameters such as **electricityType** for combustion vehicles will not be present in the response.",
+        "properties": {
+          "engineType": {
+            "$ref": "#/components/schemas/EngineType"
+          },
+          "fuelType": {
+            "$ref": "#/components/schemas/FuelType"
+          },
+          "electricityType": {
+            "$ref": "#/components/schemas/ElectricityType"
+          },
+          "averageFuelConsumption": {
+            "description": "The average fuel consumption of the vehicle.\nDepending on the **fuelType** [l/100km] for liquid fuel types or [kg/100km] for gaseous fuel types.\n\nSupported for **engineType** _COMBUSTION_  or _HYBRID_. Relevant for `emissions`.\n",
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "example": 35
+          },
+          "averageElectricityConsumption": {
+            "description": "The average power consumption of the vehicle [kWh/100km].\n\nSupported for **engineType** _ELECTRIC_ or _HYBRID_. Relevant for `emissions`.\n",
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "example": 115
+          },
+          "bioFuelRatio": {
+            "description": "The ratio of biofuel to conventional fuel [%], i.e. 10 for E10 with 10% biofuel.\n\nSupported for **engineType** _COMBUSTION_ or _HYBRID_ and only for the fuel types _GASOLINE_, _DIESEL_, _CNG_GASOLINE_ and _LNG_GASOLINE_.\nRelevant for `emissions`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100,
+            "example": 0
+          },
+          "hybridRatio": {
+            "description": "Electric energy usage ratio from the total amount of energy consumed by the vehicle.\n\nSupported for **engineType** _HYBRID_. Relevant for `emissions`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 99,
+            "example": 50
+          },
+          "dualFuelRatio": {
+            "description": "Ratio of CNG or LPG usage from the total amount of fuel consumption.\n\nSupported for **engineType** _COMBUSTION_ with **fuelType**  _CNG_GASOLINE_ or _LPG_GASOLINE_. Relevant for `emissions`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 99,
+            "example": 50
+          },
+          "cylinderCapacity": {
+            "description": "The cylinder capacity of the vehicle [cm&#x00B3;].\n\nSupported for **engineType** _COMBUSTION_ or _HYBRID_.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 12000
+          },
+          "emissionStandard": {
+            "$ref": "#/components/schemas/EmissionStandard"
+          },
+          "co2EmissionClass": {
+            "description": "The CO&#8322; emission class valid in the European Union. See also the \n[Directive 1999/62/EC](https://eur-lex.europa.eu/eli/dir/1999/62/2022-03-24) of the European Parliament and \nof the Council on the charging of heavy goods vehicles for the use of certain infrastructures, Article 7ga.\n\nRelevant for `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 5,
+            "example": 1
+          },
+          "lowEmissionZoneTypes": {
+            "description": "Comma-separated list of the low-emission zone types of the vehicle.\nThis parameter is deprecated and superseded by **lowEmissionZoneApprovals**.\n\nRelevant for `routing`.\n",
+            "deprecated": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LowEmissionZoneTypes"
+            }
+          },
+          "lowEmissionZoneApprovals": {
+            "description": "Comma-separated list of approvals to enter low-emission zones.\nUsually, such approvals are environmental badges to be placed on the windscreen,\nbut that can also be any other kind of approval or vehicle registration\nallowing it to enter a low-emission zone.\n\nLow-emission zones which do not need any kind of approval but depend only on the **emissionStandard**\nare not affected by this parameter. Instead they can be entered if the **emissionStandard** \nis sufficient. Electric vehicles can always enter these zones.\n\nAvailable values are: \n\"NONE\", \"AT_EURO_1\", \"AT_EURO_2\", \"AT_EURO_3\", \"AT_EURO_4\", \"AT_EURO_5\", \"AT_EURO_6\",\n\"DE_GREEN\", \"DE_YELLOW\", \"DE_RED\", \"DK_AUTHORIZED\", \"ES_CAT_B\", \"ES_CAT_C\", \"ES_CAT_ECO\", \"ES_CAT_ZERO\",\n\"FR_CRITAIR_0\", \"FR_CRITAIR_1\", \"FR_CRITAIR_2\", \"FR_CRITAIR_3\", \"FR_CRITAIR_4\", \"FR_CRITAIR_5\"\n\nThis list can be extended at any time, clients should handle unknown values properly. Relevant for `routing`.\n",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-extensible-enum": [
+                "NONE",
+                "AT_EURO_1",
+                "AT_EURO_2",
+                "AT_EURO_3",
+                "AT_EURO_4",
+                "AT_EURO_5",
+                "AT_EURO_6",
+                "DE_GREEN",
+                "DE_YELLOW",
+                "DE_RED",
+                "DK_AUTHORIZED",
+                "ES_CAT_B",
+                "ES_CAT_C",
+                "ES_CAT_ECO",
+                "ES_CAT_ZERO",
+                "FR_CRITAIR_0",
+                "FR_CRITAIR_1",
+                "FR_CRITAIR_2",
+                "FR_CRITAIR_3",
+                "FR_CRITAIR_4",
+                "FR_CRITAIR_5"
+              ]
+            }
+          },
+          "particleReductionClass": {
+            "$ref": "#/components/schemas/ParticleReductionClass"
+          },
+          "emptyWeight": {
+            "description": "The empty weight of the vehicle [kg].\n\nRelevant for `routing`, `emissions`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 15000
+          },
+          "loadWeight": {
+            "description": "The weight of the vehicle's load [kg].\n\nRelevant for `routing`, `emissions`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "example": 25000
+          },
+          "totalPermittedWeight": {
+            "description": "The total permitted weight of the vehicle and load [kg].\n\nRelevant for `routing`, `toll`, `emissions`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 40000
+          },
+          "totalTechnicallyPermittedWeight": {
+            "description": "The total technically permitted weight of the vehicle and load [kg].\nSometimes vehicles are registered with a smaller permitted weight than technically possible. For \nsuch cases the possibly larger total technically permitted weight is specified here, it is relevant for \ntoll calculation in some European countries.\n\nRelevant for `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 40000
+          },
+          "axleWeight": {
+            "description": "The maximum distributed weight that may be supported by an axle of the vehicle [kg].\n\nRelevant for `routing`, `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 11500
+          },
+          "numberOfAxles": {
+            "description": "The total number of axles of the vehicle including the trailers.\n\nRelevant for `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 5
+          },
+          "numberOfTires": {
+            "description": "The total number of tires of the vehicle including the trailers.\n\nRelevant for `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 10
+          },
+          "height": {
+            "description": "The height of the vehicle [cm].\n\nRelevant for `routing`, `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 400
+          },
+          "heightAboveFrontAxle": {
+            "description": "The height above the front axle [cm].\n\nRelevant for `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 400
+          },
+          "length": {
+            "description": "The length of the vehicle [cm].\n\nRelevant for `routing`, `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 1650
+          },
+          "width": {
+            "description": "The width of the vehicle [cm].\n\nRelevant for `routing`, `toll`.\n",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "example": 254
+          },
+          "hazardousMaterials": {
+            "description": "Comma-separated list of hazardous materials the vehicle has loaded.\n\nRelevant for `routing`.\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HazardousMaterials"
+            }
+          },
+          "tunnelRestrictionCode": {
+            "$ref": "#/components/schemas/TunnelRestrictionCode"
+          },
+          "truckRoutes": {
+            "$ref": "#/components/schemas/TruckRoutesList"
+          },
+          "commercial": {
+            "description": "Specifies if the vehicle usage is commercial.\n\nRelevant for `toll`.\n",
+            "type": "boolean",
+            "example": false
+          },
+          "etcSubscriptions": {
+            "description": "A comma separated list of ETC Subscriptions.\nSee [here](../routing-api/concepts/electronic-toll-collection) for more information on available subscriptions.\n\nRelevant for `toll`.\n",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EtcSubscriptionTypes"
+            }
+          }
+        }
+      },
+      "EngineType": {
+        "type": "string",
+        "description": "The engine type of the vehicle.\n\nRelevant for `toll`, `emissions`, `range calculation`.\n",
+        "example": "COMBUSTION",
+        "enum": [
+          "COMBUSTION",
+          "ELECTRIC",
+          "HYBRID"
+        ],
+        "x-enum-varnames": [
+          "COMBUSTION",
+          "ELECTRIC",
+          "HYBRID"
+        ]
+      },
+      "FuelType": {
+        "type": "string",
+        "description": "The fuel type of the vehicle.\nThe fuel types _CNG_GASOLINE_ and _LNG_GASOLINE_ are used for dual-fuel vehicles.\n\nSupported for **engineType** _COMBUSTION_ and _HYBRID_. Relevant for `emissions`.\n",
+        "example": "DIESEL",
+        "enum": [
+          "GASOLINE",
+          "DIESEL",
+          "COMPRESSED_NATURAL_GAS",
+          "LIQUEFIED_PETROLEUM_GAS",
+          "LIQUEFIED_NATURAL_GAS",
+          "CNG_GASOLINE",
+          "LPG_GASOLINE",
+          "ETHANOL",
+          "NONE"
+        ],
+        "x-enum-varnames": [
+          "GASOLINE",
+          "DIESEL",
+          "COMPRESSED_NATURAL_GAS",
+          "LIQUEFIED_PETROLEUM_GAS",
+          "LIQUEFIED_NATURAL_GAS",
+          "CNG_GASOLINE",
+          "LPG_GASOLINE",
+          "ETHANOL",
+          "NONE"
+        ]
+      },
+      "ElectricityType": {
+        "type": "string",
+        "description": "The electricity type of the vehicle.\n\nSupported for **engineType** _ELECTRIC_ or _HYBRID_. Relevant for `emissions`.\n",
+        "example": "BATTERY",
+        "enum": [
+          "BATTERY",
+          "HYDROGEN_FUEL_CELL",
+          "NONE"
+        ],
+        "x-enum-varnames": [
+          "BATTERY",
+          "HYDROGEN_FUEL_CELL",
+          "NONE"
+        ]
+      },
+      "EmissionStandard": {
+        "type": "string",
+        "description": "The emission standard of the vehicle valid in the European Union.\nThis parameter is not only important for toll and emission calculation but also for considering \nlow-emission zones which can be entered only if the vehicle has a proper emission standard.\nIn contrast to explicit approvals like environmental badges or vehicle registrations\nthe emission standard is automatically considered when entering such low-emission zones.\n\nValues different from _NONE_ are supported for **engineType** _COMBUSTION_ and _HYBRID_. Relevant for `routing`, `toll`, `emissions`.\n",
+        "example": "EURO_6",
+        "enum": [
+          "NONE",
+          "EURO_0",
+          "EURO_1",
+          "EURO_2",
+          "EURO_3",
+          "EURO_4",
+          "EURO_5",
+          "EURO_EEV",
+          "EURO_6",
+          "EURO_6C",
+          "EURO_6D_TEMP",
+          "EURO_6D",
+          "EURO_6E",
+          "EURO_7"
+        ],
+        "x-enum-varnames": [
+          "NONE",
+          "EURO_0",
+          "EURO_1",
+          "EURO_2",
+          "EURO_3",
+          "EURO_4",
+          "EURO_5",
+          "EURO_EEV",
+          "EURO_6",
+          "EURO_6C",
+          "EURO_6D_TEMP",
+          "EURO_6D",
+          "EURO_6E",
+          "EURO_7"
+        ]
+      },
+      "LowEmissionZoneTypes": {
+        "type": "string",
+        "enum": [
+          "DE_GREEN",
+          "DE_YELLOW",
+          "DE_RED",
+          "DE_NONE"
+        ],
+        "x-enum-varnames": [
+          "DE_GREEN",
+          "DE_YELLOW",
+          "DE_RED",
+          "DE_NONE"
+        ]
+      },
+      "ParticleReductionClass": {
+        "type": "string",
+        "example": "PMK_0",
+        "description": "The particle reduction class (Partikelminderungsklasse) according to 'Anlage XIV zu &sect; 48 StVZO' (German law).\n\nSupported for **engineType** _COMBUSTION_ and _HYBRID_. Relevant for `toll`.\n",
+        "enum": [
+          "PMK_0",
+          "PMK_1",
+          "PMK_2",
+          "PMK_3",
+          "PMK_4",
+          "NONE"
+        ],
+        "x-enum-varnames": [
+          "PMK_0",
+          "PMK_1",
+          "PMK_2",
+          "PMK_3",
+          "PMK_4",
+          "NONE"
+        ]
+      },
+      "HazardousMaterials": {
+        "type": "string",
+        "example": "OTHER",
+        "enum": [
+          "HAZARDOUS_TO_WATER",
+          "EXPLOSIVE",
+          "FLAMMABLE",
+          "RADIOACTIVE",
+          "INHALATION_HAZARD",
+          "MEDICAL_WASTE",
+          "OTHER",
+          "NONE"
+        ],
+        "x-enum-varnames": [
+          "HAZARDOUS_TO_WATER",
+          "EXPLOSIVE",
+          "FLAMMABLE",
+          "RADIOACTIVE",
+          "INHALATION_HAZARD",
+          "MEDICAL_WASTE",
+          "OTHER",
+          "NONE"
+        ]
+      },
+      "TunnelRestrictionCode": {
+        "type": "string",
+        "example": "NONE",
+        "description": "The tunnel restriction code according to ADR (European Agreement Concerning the International Carriage of Dangerous Goods by Road) depending on the load of the vehicle.\n\nRelevant for `routing`.\n",
+        "enum": [
+          "NONE",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "x-enum-varnames": [
+          "NONE",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      },
+      "TruckRoutesList": {
+        "description": "Comma-separated list of truck routes the vehicle has to follow.\nThis parameter will be ignored for non-truck profiles such as EUR_CAR, EUR_VAN, USA_1_PICKUP or AUS_LCV_LIGHT_COMMERCIAL.\n * `DE_LKWUEBERLSTVAUSNV`\n Preferred routes for long trucks in Germany, also known as Lang-LKW.\n * `NL_LZV`\n Preferred routes for long trucks in the Netherlands, also known as LZV (Langere en Zwaardere Vrachtautocombinatie).\n * `NZ_HPMV`\n The network for High Productivity Motor Vehicles (HPMV) carrying the maximum loads available under a permit (New Zeland Transport Agency).\n * `SE_BK_1`\n Public roads and bridges that support up to 64 t total permitted weight (Swedish Transport Administration).\n * `SE_BK_2`\n Public roads and bridges that support up to 51.4 t total permitted weight.\n Actual limit depends on wheelbase and axle weight (Swedish Transport Administration).\n * `SE_BK_3`\n Public roads and bridges that support up to 37.5 t total permitted weight.\n Actual limit depends on wheelbase and axle weight (Swedish Transport Administration).\n * `SE_BK_4`\n Public roads and bridges that support up to 74 t total permitted weight (draft summer 2018, Swedish Transport Administration).\n * `US_STAA`\n Routes that belong to the highway network as defined by the Surface Transportation Assistance Act in the US.\n * `US_TD`\n Part of a state-designated highway network for trucks in the US.\n * `AU_B_DOUBLE`\n B-Double routes as defined in Australia.\n * `AU_B_DOUBLE_HML`\n Routes for B-Double vehicle combinations operating at Higher Mass Limits (HML) (Australian Transport Administration).\n * `AU_B_TRIPLE`\n B-Triple routes as defined in Australia.\n * `AU_B_TRIPLE_HML`\n Routes for B-Triple vehicle combinations operating at Higher Mass Limits (HML) (Australian Transport Administration).\n * `AU_AB_TRIPLE`\n Routes for AB-Triple vehicle combinations operating (Australian Transport Administration).\n * `AU_AB_TRIPLE_HML`\n Routes for AB-Triple vehicle combinations operating at Higher Mass Limits (HML) (Australian Transport Administration).\n * `NONE`\n Not used.\n\nRelevant for `routing`.\nCannot be used with **options[routingMode]=MONETARY**.\n",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/TruckRoutes"
+        }
+      },
+      "TruckRoutes": {
+        "type": "string",
+        "example": "SE_BK_1",
+        "enum": [
+          "DE_LKWUEBERLSTVAUSNV",
+          "NL_LZV",
+          "NZ_HPMV",
+          "SE_BK_1",
+          "SE_BK_2",
+          "SE_BK_3",
+          "SE_BK_4",
+          "US_STAA",
+          "US_TD",
+          "AU_B_DOUBLE",
+          "AU_B_DOUBLE_HML",
+          "AU_B_TRIPLE",
+          "AU_B_TRIPLE_HML",
+          "AU_AB_TRIPLE",
+          "AU_AB_TRIPLE_HML",
+          "NONE"
+        ],
+        "x-enum-varnames": [
+          "DE_LKWUEBERLSTVAUSNV",
+          "NL_LZV",
+          "NZ_HPMV",
+          "SE_BK_1",
+          "SE_BK_2",
+          "SE_BK_3",
+          "SE_BK_4",
+          "US_STAA",
+          "US_TD",
+          "AU_B_DOUBLE",
+          "AU_B_DOUBLE_HML",
+          "AU_B_TRIPLE",
+          "AU_B_TRIPLE_HML",
+          "AU_AB_TRIPLE",
+          "AU_AB_TRIPLE_HML",
+          "NONE"
+        ]
+      },
+      "EtcSubscriptionTypes": {
+        "type": "string",
+        "example": "DE_TOLLCOLLECT",
+        "enum": [
+          "AT_GOBOX",
+          "BE_TELETOL",
+          "BE_VIAPASS",
+          "CH_LSVA",
+          "DE_QUICKBOX",
+          "DE_TOLLCOLLECT",
+          "DE_WARNOWTUNNEL_RFID",
+          "DK_BROPAS_BUSINESS",
+          "IT_TELEPASS",
+          "NL_TELECARD",
+          "NL_TTAG",
+          "NO_AUTOPASS",
+          "PT_VIA_VERDE",
+          "US_APASS",
+          "US_BREEZEBY",
+          "US_DOWNBEACH_EXPRESSPASS",
+          "US_EPASS",
+          "US_EXPRESSACCOUNT",
+          "US_EXPRESSCARD",
+          "US_EXPRESSPASS",
+          "US_EXPRESSTOLL",
+          "US_EZPASS",
+          "US_EZTAG",
+          "US_FASTRAK",
+          "US_GEAUXPASS",
+          "US_GOODTOGO",
+          "US_GOPASS",
+          "US_IPASS",
+          "US_KTAG",
+          "US_LEEWAY",
+          "US_MACKINACBRIDGE_MACPASS",
+          "US_MARYLAND_EZPASS",
+          "US_MASSACHUSETTS_EZPASS",
+          "US_NC_QUICKPASS",
+          "US_NEWHAMPSHIRE_EZPASS",
+          "US_NEWJERSEY_EZPASS",
+          "US_NEWYORK_EZPASS",
+          "US_NEXPRESS",
+          "US_OHIO_EZPASS",
+          "US_PALPASS",
+          "US_PIKEPASS",
+          "US_RIVERLINK",
+          "US_RIVERLINK_NOTRANSPONDER",
+          "US_SEAWAYTRANSITCARD",
+          "US_SUNPASS",
+          "US_TOLLTAG",
+          "US_TXTAG",
+          "US_VIRGINIA_EZPASS",
+          "US_WESTVIRGINIA_EZPASS",
+          "US_PEACHPASS",
+          "US_NEXUS",
+          "US_DELAWARE_EZPASS",
+          "US_GROSSEILETOLLBRIDGE_PASSTAG",
+          "US_EZPASS_PAYBYPLATE"
+        ],
+        "x-enum-varnames": [
+          "AT_GOBOX",
+          "BE_TELETOL",
+          "BE_VIAPASS",
+          "CH_LSVA",
+          "DE_QUICKBOX",
+          "DE_TOLLCOLLECT",
+          "DE_WARNOWTUNNEL_RFID",
+          "DK_BROPAS_BUSINESS",
+          "IT_TELEPASS",
+          "NL_TELECARD",
+          "NL_TTAG",
+          "NO_AUTOPASS",
+          "PT_VIA_VERDE",
+          "US_APASS",
+          "US_BREEZEBY",
+          "US_DOWNBEACH_EXPRESSPASS",
+          "US_EPASS",
+          "US_EXPRESSACCOUNT",
+          "US_EXPRESSCARD",
+          "US_EXPRESSPASS",
+          "US_EXPRESSTOLL",
+          "US_EZPASS",
+          "US_EZTAG",
+          "US_FASTRAK",
+          "US_GEAUXPASS",
+          "US_GOODTOGO",
+          "US_GOPASS",
+          "US_IPASS",
+          "US_KTAG",
+          "US_LEEWAY",
+          "US_MACKINACBRIDGE_MACPASS",
+          "US_MARYLAND_EZPASS",
+          "US_MASSACHUSETTS_EZPASS",
+          "US_NC_QUICKPASS",
+          "US_NEWHAMPSHIRE_EZPASS",
+          "US_NEWJERSEY_EZPASS",
+          "US_NEWYORK_EZPASS",
+          "US_NEXPRESS",
+          "US_OHIO_EZPASS",
+          "US_PALPASS",
+          "US_PIKEPASS",
+          "US_RIVERLINK",
+          "US_RIVERLINK_NOTRANSPONDER",
+          "US_SEAWAYTRANSITCARD",
+          "US_SUNPASS",
+          "US_TOLLTAG",
+          "US_TXTAG",
+          "US_VIRGINIA_EZPASS",
+          "US_WESTVIRGINIA_EZPASS",
+          "US_PEACHPASS",
+          "US_NEXUS",
+          "US_DELAWARE_EZPASS",
+          "US_GROSSEILETOLLBRIDGE_PASSTAG",
+          "US_EZPASS_PAYBYPLATE"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "description",
+          "errorCode",
+          "traceId"
+        ],
+        "properties": {
+          "description": {
+            "description": "A human readable message that describes the error.",
+            "type": "string"
+          },
+          "errorCode": {
+            "description": "A constant string that can be used to identify this error class programmatically.\nAn errorCode can have **details** to provide information in additional properties which are described with the code they apply to. They are of type string unless otherwise specified.\nNote that additional errorCodes as well as the **details** of existing errorCodes may be added at any time. Furthermore, the **description** may change at any time.\n\n**HTTP status code: 400**\n* `GENERAL_VALIDATION_ERROR` - The validation of the request failed. Details can be found in **causes**.\n* `GENERAL_PARSING_ERROR` - The JSON syntax is invalid.\n* `ROADATTRIBUTES_ERROR` - Processing the custom road attributes scenario failed. Details can be found in **causes**.\n\n**HTTP status code: 401**\n* `GENERAL_UNAUTHENTICATED` - Invalid or missing authentication credentials.\n  * `message` - An additional error message.\n\n**HTTP status code: 403**\n* `GENERAL_FORBIDDEN` - Insufficient access rights.\n* `GENERAL_QUOTA_EXCEEDED` - The transaction limit is exceeded.\n  * `message` - An additional error message.\n* `ROADATTRIBUTES_RESTRICTION_EXCEEDED` - A product-specific restriction is exceeded.\n* `DATA_RESTRICTION_EXCEEDED` - A product-specific restriction is exceeded.\n\n**HTTP status code: 404**\n* `GENERAL_RESOURCE_NOT_FOUND` - A requested resource does not exist.\n  * `message` - An additional error message.\n\n**HTTP status code: 429**\n* `GENERAL_RATE_LIMIT_EXCEEDED` - The rate limit is exceeded.\n\n**HTTP status code: 500**\n* `GENERAL_INTERNAL_SERVER_ERROR` - The request could not be processed due to an internal error.\n  * `message` - An additional error message.\n  * `hint` - A hint how to solve the problem.\n\n**HTTP status code: 503**\n* `GENERAL_SERVICE_UNAVAILABLE` - The service is temporarily unavailable.\n\n**HTTP status code: 4xx-5xx**\n* `GENERAL_INTERNAL_GATEWAY_ERROR` - The request could not be processed due to an internal gateway error.\n  * `hint` - A hint how to solve the problem.",
+            "type": "string"
+          },
+          "traceId": {
+            "description": "A unique identifier of the corresponding trace forest. It can be used to trace errors by the support.",
+            "type": "string"
+          },
+          "errorId": {
+            "description": "A unique identifier specific to this error instance. It can be used to trace errors by the support.",
+            "type": "string"
+          },
+          "causes": {
+            "description": "A list of affected parameters and/or properties that caused this error.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CausingError"
+            }
+          },
+          "details": {
+            "description": "Additional properties specific to this error class.",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "CausingError": {
+        "type": "object",
+        "required": [
+          "description",
+          "errorCode"
+        ],
+        "properties": {
+          "description": {
+            "description": "A human readable message that describes the error.",
+            "type": "string"
+          },
+          "errorCode": {
+            "description": "A constant string that can be used to identify this error class programmatically.\nAn errorCode can have **details** to provide information in additional properties which are described with the code they apply to. They are of type string unless otherwise specified.\nNote that additional errorCodes as well as the **details** of existing errorCodes may be added at any time. Furthermore, the **description** may change at any time.\n\n**Error codes for** `GENERAL_VALIDATION_ERROR`\n\n* `GENERAL_INVALID_VALUE` - A parameter is set to an invalid value.\n  * `value` - The invalid value.\n* `GENERAL_UNRECOGNIZED_PARAMETER` - A parameter is unknown.\n* `GENERAL_MISSING_PARAMETER` - A required parameter is missing.\n* `GENERAL_MINIMUM_LENGTH_VIOLATED` - The minimum length is violated.\n  * `minimumLength` - The minimum length (integer).\n* `GENERAL_MAXIMUM_LENGTH_VIOLATED` - The maximum length is violated.\n  * `maximumLength` - The maximum length (integer).\n* `GENERAL_MINIMUM_VALUE_VIOLATED` - The minimum value restriction is violated.\n  * `minimumValue` - The minimum value (integer or double).\n* `GENERAL_MAXIMUM_VALUE_VIOLATED` - The maximum value restriction is violated.\n  * `maximumValue` - The maximum value (integer or double).\n* `GENERAL_DUPLICATE_PARAMETER` - A parameter is duplicated.\n* `GENERAL_INVALID_LIST` - A list has an invalid format such as duplicate commas.\n  * `value` - The invalid list.\n* `GENERAL_INVALID_INTERVAL` - A time interval is invalid, i.e. start is greater than end.\n* `ROADATTRIBUTES_INVALID_NUMBER_OF_COORDINATES` - The points cannot be parsed because the number of coordinates is not even.\n  * `value` - The invalid parameter value.\n* `ROADATTRIBUTES_INVALID_COORDINATE` - The provided coordinate is not in the valid range or cannot be parsed.\n  * `value` - The invalid parameter value.\n  * `coordinateIndex` - The index denoting the erroneous coordinate within the polyline (integer).\n* `ROADATTRIBUTES_WEEKLY_SCHEDULE_EXCEEDS_ONE_WEEK` - The weekly schedule exceeds one week (168 hours).\n* `ROADATTRIBUTES_SCENARIOS_NOT_FOUND` - At least one of the requested scenarios could not be found.\n  * `scenarios` - The scenarios which could not be found (comma-separated list).\n* `ROADATTRIBUTES_NO_ACTIVE_SCENARIO` - No active scenario was given.\n* `ROADATTRIBUTES_INVALID_POLYGON` - The polygon is invalid. Please make sure it does not contain spikes and is not self-intersecting. Polygons must be valid according to OGC.\n  * `value` - The invalid parameter value.\n\n**Error codes for** `ROADATTRIBUTES_RESTRICTION_EXCEEDED`\n\n* `ROADATTRIBUTES_TOO_MANY_SCENARIOS` - Too many custom road attributes scenarios have been created. - _The **parameter** remains empty._\n  * `limit` - The maximum allowed number of custom road attribute scenarios (integer).\n* `ROADATTRIBUTES_TOO_MANY_ROADS_SELECTED` - Too many roads are contained in the selection.\n  * `limit` - The maximum allowed number of selected roads (integer).\n* `ROADATTRIBUTES_TOO_MANY_ROADS_IN_SCENARIO` - Too many roads are contained in the scenario.\n  * `limit` - The maximum allowed number of selected roads (integer) in the scenario.\n\n**Error codes for** `DATA_RESTRICTION_EXCEEDED`\n\n* `DATA_TOO_MANY_COMBINED_TRANSPORTS_SELECTED` - The combination of the point and radius led to too many combined transports.\n  * `limit` - The maximum allowed number of selected combined transports (integer).\n\n**Error codes for** `GENERAL_RESOURCE_NOT_FOUND`\n\n* `GENERAL_INVALID_ID` - The ID does not exist.\n  * `value` - The invalid ID.\n\n**Error codes for** `ROADATTRIBUTES_ERROR`\n\n* `ROADATTRIBUTES_NO_ROAD_FOUND` - With the given points no road can be found.\n  * `value` - The invalid parameter value.\n  * `hint` - A hint how to solve the problem.\n* `ROADATTRIBUTES_DIRECTION_CANNOT_BE_APPLIED` - The direction cannot be applied to more than one road, use **direction** _BOTH_ instead.\n  * `value` - The invalid direction.\n* `ROADATTRIBUTES_UPDATE_NOT_MOST_RECENT_REVISION` - The scenario to be updated is not the most recent revision. Only the most recent revision can be updated.\n* `ROADATTRIBUTES_NAME_ALREADY_EXISTS` - A custom road attribute scenario with the same name already exists.\n  * `value` - The duplicate name.",
+            "type": "string"
+          },
+          "parameter": {
+            "description": "The name of the affected query or path parameter or a JSONPath to the affected property of the request.",
+            "type": "string"
+          },
+          "details": {
+            "description": "Additional properties specific to this error class.",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "RegionType": {
+        "type": "string",
+        "description": "The region in this profile is designed for. It represents the characteristics of its region.\nSee the [profiles concept](./concepts/profiles) for details.\n",
+        "example": "EUROPE",
+        "enum": [
+          "EUROPE",
+          "AMERICA",
+          "AUSTRALIA",
+          "IMEA",
+          "WORLD"
+        ],
+        "x-enum-varnames": [
+          "EUROPE",
+          "AMERICA",
+          "AUSTRALIA",
+          "IMEA",
+          "WORLD"
+        ]
+      },
+      "PredefinedVehicleProfile": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "region",
+          "currency"
+        ],
+        "properties": {
+          "name": {
+            "description": "The name of the predefined profile.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "description": {
+            "description": "The description of the predefined profile.",
+            "type": "string"
+          },
+          "region": {
+            "$ref": "#/components/schemas/RegionType"
+          },
+          "vehicle": {
+            "$ref": "#/components/schemas/Vehicle"
+          },
+          "currency": {
+            "description": "The default currency for the predefined vehicle according to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).",
+            "type": "string"
+          },
+          "monetaryCostOptions": {
+            "$ref": "#/components/schemas/MonetaryCostOptions"
+          }
+        }
+      },
+      "PredefinedVehicleProfiles": {
+        "type": "object",
+        "required": [
+          "profiles"
+        ],
+        "properties": {
+          "profiles": {
+            "description": "A list of predefined vehicle profiles.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PredefinedVehicleProfile"
+            }
+          }
+        }
+      },
+      "MonetaryCostOptions": {
+        "type": "object",
+        "required": [
+          "costPerKilometer",
+          "workingCostPerHour"
+        ],
+        "properties": {
+          "costPerKilometer": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "Specifies the cost per kilometer. The default value of a profile is used as an example and can change at any time."
+          },
+          "workingCostPerHour": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "description": "Specifies the cost per hour. It is not applied to service, break or rest periods. The default value of a profile is used as an example and can change at any time."
+          }
+        }
+      },
+      "CustomRoadAttributeScenario": {
+        "type": "object",
+        "description": "A custom road attribute scenario.",
+        "required": [
+          "roadsToBeAttributed"
+        ],
+        "properties": {
+          "id": {
+            "description": "The ID of the custom road attribute scenario.",
+            "readOnly": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "A user-defined name of the custom road attribute scenario.\nIf specified, it must be unique for the current user.\nThis name can be used in other APIs instead of its ID, then it must not contain a comma.",
+            "type": "string"
+          },
+          "roadsToBeAttributed": {
+            "description": "A collection of roads and attributes to be assigned. The accumulated number of roads from all selectors must\nnot exceed 20000 roads.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/RoadsToBeAttributed"
+            }
+          },
+          "shared": {
+            "description": "If true, this custom road attribute scenario can be used by every user by its ID.\nOther users than the owner cannot modify or delete it nor will it be listed with **getAllCustomRoadAttributeScenarios**.",
+            "type": "boolean",
+            "default": false
+          },
+          "active": {
+            "description": "If false, this custom road attribute scenario will be marked inactive and not used for subsequent route calculations until set active again.\nThis is useful to ignore the scenario without deleting its contents.",
+            "type": "boolean",
+            "default": true
+          },
+          "revision": {
+            "description": "The revision number of the custom road attribute scenario which will automatically be maintained by the server.\nIn responses it will contain the number of updates of this specific scenario. When creating a scenario, it\nwill be ignored. When updating a scenario, pass the number which you got from the server in the corresponding\nget request to make sure that the scenario has not been changed in the meantime. The server will reject updates\nfor which the revision number does not match the revision stored in the database.\nWhen left empty in an update request, any changes will be overwritten.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        }
+      },
+      "RoadsToBeAttributed": {
+        "required": [
+          "points",
+          "attributes"
+        ],
+        "type": "object",
+        "properties": {
+          "points": {
+            "description": "A point, a polyline or a polygon to select roads.\n\nFor a single point the road closest to this point will be selected. Several points where the first and last \npoint are different will be considered a polyline and all roads intersected by this polyline will be \nselected. If the polyline is closed, i.e. the first and the last point are the same, the polyline defines \na polygon and all roads whose complete polyline is within the polygon will be selected. A polygon must be \nvalid according to [OGC](https://www.ogc.org/standard/sfa/). Holes within polygons are not supported.\nFerries will not be selected.\n\nFormat: `<point1_lat>,<point1_lon>,...,<pointN_lat>,<pointN_lon>`.\n\nA request will be rejected if it\n* does not contain an even number of coordinates,\n* contains a closed polyline defining an invalid polygon according to OGC,\n* contains invalid coordinates,\n* covers no road or\n* covers more than 5000 roads.",
+            "type": "string"
+          },
+          "polylines": {
+            "type": "array",
+            "description": "The polylines of the roads in the format specified by **polylineFormat**.\n\nOnly present in responses, will be ignored in requests.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "direction": {
+            "$ref": "#/components/schemas/RoadDirectionType"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/RoadAttributes"
+          },
+          "validity": {
+            "$ref": "#/components/schemas/Validity"
+          },
+          "unmatchedAfterMapUpdate": {
+            "$ref": "#/components/schemas/UnmatchedAfterMapUpdate"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of this set of attributed roads which is useful to refer to that in an application."
+          }
+        }
+      },
+      "RoadDirectionType": {
+        "default": "BOTH",
+        "description": "The direction of the road the attributes apply to.\n * `POLYLINE_DIRECTION` - Describes the direction from the start node to the end node of the polyline of the road.\n * `REVERSE_POLYLINE_DIRECTION` - Describes the direction from the end node to the start node of the polyline of the road.\n * `BOTH` - Describes both directions.\n\nIf the selection contains more than one road and the direction is different from _BOTH_, an error will be returned.",
+        "type": "string",
+        "enum": [
+          "POLYLINE_DIRECTION",
+          "REVERSE_POLYLINE_DIRECTION",
+          "BOTH"
+        ],
+        "x-enum-varnames": [
+          "POLYLINE_DIRECTION",
+          "REVERSE_POLYLINE_DIRECTION",
+          "BOTH"
+        ]
+      },
+      "RoadAttributes": {
+        "type": "object",
+        "description": "The attributes assigned to each of the selected roads.",
+        "properties": {
+          "prohibited": {
+            "description": "The road is prohibited, it will not be used in route calculation. Setting this value to false does not have a meaning.",
+            "type": "boolean"
+          },
+          "relativeSpeed": {
+            "description": "The driving speed on this road is set relative to this value [%].\nThis is useful when, for example, dense traffic is known or expected due to public events or because lanes are closed.\nSettings this value to 70 means that the driving speed is 70% of the originally assumed driving speed.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 99,
+            "example": 70
+          }
+        }
+      },
+      "CustomRoadAttributeScenarioList": {
+        "description": "A list of custom road attribute scenarios.",
+        "type": "object",
+        "properties": {
+          "customRoadAttributeScenarios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomRoadAttributeScenario"
+            }
+          }
+        }
+      },
+      "RoadsResponse": {
+        "type": "object",
+        "description": "The roads selected by the input.",
+        "properties": {
+          "roads": {
+            "description": "The list of selected roads according to the criteria specified in the request.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Road"
+            }
+          }
+        }
+      },
+      "Road": {
+        "type": "object",
+        "properties": {
+          "polyline": {
+            "description": "The polyline of the road in the format specified by **polylineFormat**.",
+            "type": "string"
+          }
+        }
+      },
+      "CombinedTransportByPosition": {
+        "type": "object",
+        "description": "The position around which to scan for combined transports in the map data.",
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "radius": {
+            "description": "The circle defined by the given point and this radius [m] in which to scan for combined transports.",
+            "type": "integer",
+            "format": "int32",
+            "default": 5000,
+            "minimum": 1
+          }
+        }
+      },
+      "CombinedTransportsResponse": {
+        "type": "object",
+        "required": [
+          "combinedTransports"
+        ],
+        "description": "The combined transports selected by the input parameters.",
+        "properties": {
+          "combinedTransports": {
+            "description": "The list of selected combined transports sorted by ascending distance to the input coordinate.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CombinedTransport"
+            }
+          }
+        }
+      },
+      "CombinedTransport": {
+        "type": "object",
+        "required": [
+          "polyline",
+          "name",
+          "duration",
+          "type",
+          "start",
+          "destination",
+          "allowedFor",
+          "waypointsParameter"
+        ],
+        "properties": {
+          "polyline": {
+            "description": "The polyline of the combined transport in the format specified by **polylineFormat**.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the combined transport.\n**Note:** The names of the start location and the destination location do not have to match with the name of\nthe combined transport. In such cases the combined transport name may refer to a roundtrip with one or more \nintermediate stops. However, this combined transport represents only the part between the start location \nand the destination location.",
+            "type": "string"
+          },
+          "duration": {
+            "description": "The approximated duration of the combined transport [s].",
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "description": "The type of the combined transport, i.e. how the vehicle is transported.\n * `BOAT` - The combined transport is by boat, i.e. on a ferry.\n * `RAIL` - The combined transport is by rail, i.e. on a train or rail shuttle.",
+            "type": "string",
+            "x-extensible-enum": [
+              "BOAT",
+              "RAIL"
+            ]
+          },
+          "start": {
+            "$ref": "#/components/schemas/CombinedTransportLocation"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/CombinedTransportLocation"
+          },
+          "allowedFor": {
+            "description": "Comma-separated list of vehicles that may use this combined transport.\nValues can be `CAR`,`VAN`,`TRUCK`.",
+            "type": "string"
+          },
+          "waypointsParameter": {
+            "description": "The combined transport represented as a string that can be used as a **waypoints** parameter in the method **calculateRoute** of the Routing API.",
+            "type": "string",
+            "example": "combinedTransport=54.5009693,11.2273406,54.6604379,11.3608932"
+          }
+        }
+      },
+      "CombinedTransportLocation": {
+        "description": "Represents the start or destination location of a combined transport, e.g. the port. The fields **latitude** and **longitude** \ncan be used as input for combined transport waypoints in the method **calculateRoutePost** of the Routing API.",
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude",
+          "name",
+          "countryCode"
+        ],
+        "properties": {
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "name": {
+            "description": "The name of the location, usually refers to the district to which the location is assigned.",
+            "type": "string"
+          },
+          "countryCode": {
+            "description": "The country or subdivision of this location represented by its code according to [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) if referring to a subdivision.",
+            "type": "string"
+          }
+        }
+      },
+      "PolylineFormat": {
+        "type": "string",
+        "description": "Defines the format for polylines in the response.\n * `GEO_JSON` - Polylines are returned in [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) format.\n * `GOOGLE_ENCODED_POLYLINE` - Polylines are returned in [Google's Encoded Polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) format.",
+        "default": "GEO_JSON",
+        "enum": [
+          "GEO_JSON",
+          "GOOGLE_ENCODED_POLYLINE"
+        ],
+        "x-enum-varnames": [
+          "GEO_JSON",
+          "GOOGLE_ENCODED_POLYLINE"
+        ]
+      },
+      "Latitude": {
+        "maximum": 90,
+        "minimum": -90,
+        "type": "number",
+        "description": "The latitude value in degrees (WGS84/EPSG:4326) from south to north.",
+        "format": "double",
+        "example": 49.480301
+      },
+      "Longitude": {
+        "maximum": 180,
+        "minimum": -180,
+        "type": "number",
+        "description": "The longitude value in degrees (WGS84/EPSG:4326) from west to east.",
+        "format": "double",
+        "example": 6.110667
+      },
+      "Validity": {
+        "type": "object",
+        "description": "The periods during which the attributes are valid.\nIf both time intervals and weekly schedule are specified, the attributes are valid only during the weekly schedule\nwithin the time intervals. If there is no such period, the attributes are never valid.\nIf not specified, the attributes are always valid.",
+        "properties": {
+          "timeIntervals": {
+            "type": "array",
+            "description": "If the attributes are valid during specific periods, specify concrete time intervals.\nEach time interval has an explicit start and end date.\nOverlapping intervals will be merged.",
+            "items": {
+              "$ref": "#/components/schemas/TimeInterval"
+            }
+          },
+          "weeklySchedule": {
+            "$ref": "#/components/schemas/WeeklySchedule"
+          }
+        }
+      },
+      "TimeInterval": {
+        "required": [
+          "start",
+          "end"
+        ],
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "The beginning of the time interval according to [RFC 3339](https://tools.ietf.org/html/rfc3339).\nThe date must not be before 1970-01-01T00:00:00+00:00 nor after 2037-12-31T23:59:59+00:00.\nIf the date-time string does not include an explicit offset to UTC, the time will be interpreted as the local time of the first road found.",
+            "format": "date-time",
+            "example": "2020-12-07T00:00:00+00:00"
+          },
+          "end": {
+            "type": "string",
+            "description": "The end of the time interval according to [RFC 3339](https://tools.ietf.org/html/rfc3339).\nThe date must not be before 1970-01-01T00:00:00+00:00 nor after 2037-12-31T23:59:59+00:00. It must not be before the start of the interval.\nIf the date-time string does not include an explicit offset to UTC, the time will be interpreted as the local time of the first road found.",
+            "format": "date-time",
+            "example": "2020-12-07T01:00:00+00:00"
+          }
+        },
+        "description": "A period during which the road attributes are valid."
+      },
+      "WeeklySchedule": {
+        "type": "array",
+        "description": "If the attributes are valid in a regular manner, i.e. at specific times and/or days of week, specify a weekly schedule.\nEach interval is specified by the starting point in time and the duration.\nThe starting points of the intervals must be in local time and in ascending order. Overlapping intervals will be merged.\nThe total duration of all intervals must not exceed one week (168 hours).",
+        "items": {
+          "$ref": "#/components/schemas/WeeklyScheduleInterval"
+        }
+      },
+      "WeeklyScheduleInterval": {
+        "required": [
+          "dayOfWeek",
+          "hour",
+          "minute",
+          "duration"
+        ],
+        "type": "object",
+        "properties": {
+          "dayOfWeek": {
+            "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "hour": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The hour the schedule interval starts.",
+            "example": 12,
+            "minimum": 0,
+            "maximum": 23
+          },
+          "minute": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The minutes of hours the schedule interval starts.",
+            "example": 30,
+            "minimum": 0,
+            "maximum": 59
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The duration of the schedule interval in [min].",
+            "example": 360,
+            "minimum": 1,
+            "maximum": 10080
+          }
+        }
+      },
+      "DayOfWeek": {
+        "type": "string",
+        "example": "MONDAY",
+        "description": "The day of week the schedule interval starts.",
+        "enum": [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+          "SUNDAY"
+        ],
+        "x-enum-varnames": [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+          "SUNDAY"
+        ]
+      },
+      "RoadAttributesResults": {
+        "type": "string",
+        "example": "POLYLINES",
+        "enum": [
+          "POLYLINES"
+        ],
+        "x-enum-varnames": [
+          "POLYLINES"
+        ]
+      },
+      "UnmatchedAfterMapUpdate": {
+        "type": "boolean",
+        "default": false,
+        "description": "If **roadsToBeAttributed** could not be matched to a new map after an update they are marked with this boolean flag.\nUnmatched **roadsToBeAttributed** might cause some unwanted changes of behavior for the scenario.\nThis parameter must not be true if it is sent as part of a request."
+      },
+      "MapInformationResponse": {
+        "type": "object",
+        "required": [
+          "geographicalUnits"
+        ],
+        "properties": {
+          "geographicalUnits": {
+            "type": "array",
+            "description": "Lists the available data and their features for each geographical unit, usually a country or a state, sorted by their ISO 3166 code.",
+            "items": {
+              "$ref": "#/components/schemas/GeographicalUnit"
+            }
+          }
+        }
+      },
+      "GeographicalUnit": {
+        "type": "object",
+        "required": [
+          "code",
+          "country",
+          "continent",
+          "features"
+        ],
+        "description": "Base type for a geographical unit. Depending\non how the data are built up a country can have subdivisions, e.g. a state\nin the US, or not.\n",
+        "properties": {
+          "code": {
+            "description": "The code of the geographical unit represented by its code according to [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) if referring to a subdivision.",
+            "type": "string",
+            "minLength": 1
+          },
+          "country": {
+            "description": "The name of the country this geographical unit represents or belongs to.",
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "description": "The name of the state this geographical unit represents. Not present if it represents a country.",
+            "type": "string",
+            "minLength": 1
+          },
+          "continent": {
+            "$ref": "#/components/schemas/Continent"
+          },
+          "features": {
+            "$ref": "#/components/schemas/MapFeatures"
+          }
+        }
+      },
+      "MapFeatures": {
+        "type": "object",
+        "required": [
+          "toll"
+        ],
+        "description": "The features supported by this geographical unit.\n",
+        "properties": {
+          "toll": {
+            "description": "If true, toll is supported in this geographical unit.\nFalse means that no toll data is available or toll does not apply in this geographical unit.\nVignettes are not considered.",
+            "type": "boolean"
+          },
+          "tollFeatures": {
+            "$ref": "#/components/schemas/TollFeatures"
+          }
+        }
+      },
+      "TollFeatures": {
+        "type": "object",
+        "required": [
+          "tollSystems"
+        ],
+        "description": "The toll features contained by this geographical unit.\n",
+        "properties": {
+          "tollSystems": {
+            "description": "The list of toll systems contained by this geographical unit.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TollSystem"
+            }
+          }
+        }
+      },
+      "TollSystem": {
+        "type": "object",
+        "required": [
+          "name",
+          "operator",
+          "tariffVersions"
+        ],
+        "description": "Contains information about the toll system such as the name, operator and especially the different tariff versions that are currently available.",
+        "properties": {
+          "name": {
+            "description": "The name of the toll system.",
+            "type": "string"
+          },
+          "operator": {
+            "description": "The operator of the toll system.",
+            "type": "string"
+          },
+          "tariffVersions": {
+            "description": "The tariff versions.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TariffVersion"
+            }
+          }
+        }
+      },
+      "TariffVersion": {
+        "type": "object",
+        "required": [
+          "version",
+          "validFrom"
+        ],
+        "description": "The tariff version.",
+        "properties": {
+          "version": {
+            "description": "The version.",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the tariff version. Only present if major changes are introduced such as introducing new\nvehicle classes or adding or removing toll roads.",
+            "type": "string"
+          },
+          "validFrom": {
+            "description": "The date at which this tariff version becomes valid formatted according to [RFC 3339](https://tools.ietf.org/html/rfc3339).",
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Continent": {
+        "type": "string",
+        "example": "EUROPE",
+        "description": "The continent the geographical unit belongs to.",
+        "enum": [
+          "EUROPE",
+          "NORTH_AMERICA",
+          "SOUTH_AMERICA",
+          "AFRICA",
+          "ASIA",
+          "AUSTRALIA_OCEANIA"
+        ],
+        "x-enum-varnames": [
+          "EUROPE",
+          "NORTH_AMERICA",
+          "SOUTH_AMERICA",
+          "AFRICA",
+          "ASIA",
+          "AUSTRALIA_OCEANIA"
+        ]
+      },
+      "VehicleModels": {
+        "type": "object",
+        "required": [
+          "vehicleModels"
+        ],
+        "properties": {
+          "vehicleModels": {
+            "description": "A list of model-based vehicles.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VehicleModel"
+            }
+          }
+        }
+      },
+      "VehicleModel": {
+        "type": "object",
+        "required": [
+          "id",
+          "predefinedProfile",
+          "vehicleType",
+          "commercial"
+        ],
+        "properties": {
+          "id": {
+            "description": "The ID of the vehicle model. It is needed to identify a model-based vehicle in the Routing API.",
+            "readOnly": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          "predefinedProfile": {
+            "description": "The predefined profile on which this vehicle model is based. Relevant for calculating routes with this vehicle model in Routing API.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "vehicleType": {
+            "description": "The type of the vehicle. \nThe model is able to calculate the consumption of combinations of tractor-like vehicles and trailer-like ones. The following vehicle types are supported.\n\nTractor-like vehicle types:\n* `TRUCK` - Truck. Total permitted weight > 7.5t.\n* `LCV` - Light Commercial Vehicle. Total permitted weight < 7.5t.\n* `SCV` - Small Commercial Vehicle. Total permitted weight < 3.5t.\n\nTrailer-like vehicle types:\n* `TRAILER` - Trailer\n* `SEMI_TRAILER` - Semi-trailer\n* `BODY` - Body\n\nThis list can be extended at any time, clients should handle unknown values properly. Relevant for `range calculation`.",
+            "type": "string",
+            "x-extensible-enum": [
+              "TRUCK",
+              "LCV",
+              "SCV",
+              "TRAILER",
+              "SEMI_TRAILER",
+              "BODY"
+            ],
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "commercial": {
+            "$ref": "#/components/schemas/Commercial"
+          },
+          "engine": {
+            "$ref": "#/components/schemas/Engine"
+          },
+          "battery": {
+            "$ref": "#/components/schemas/Battery"
+          }
+        }
+      },
+      "Commercial": {
+        "type": "object",
+        "required": [
+          "manufacturer",
+          "model"
+        ],
+        "description": "Properties of a vehicle from a commercial point of view.",
+        "properties": {
+          "manufacturer": {
+            "description": "The producer of the vehicle.",
+            "type": "string",
+            "example": "FunnyTrucks Inc."
+          },
+          "model": {
+            "description": "The model of the vehicle.",
+            "type": "string",
+            "example": "FT1"
+          },
+          "variant": {
+            "description": "The model variant of the vehicle.",
+            "type": "string"
+          },
+          "launchYear": {
+            "description": "The year the vehicle was launched on the market.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1900,
+            "example": 2020
+          }
+        }
+      },
+      "Engine": {
+        "type": "object",
+        "required": [
+          "engineType",
+          "maximumSpeed",
+          "ecoSpeed",
+          "emissionStandard"
+        ],
+        "description": "Physical and legal properties of the engine of a vehicle. It is null for an unpowered vehicle.",
+        "properties": {
+          "engineType": {
+            "$ref": "#/components/schemas/EngineType"
+          },
+          "maximumSpeed": {
+            "description": "Maximum travel speed [km/h].\n\nRelevant for `range calculation`.\n",
+            "type": "integer",
+            "format": "int32"
+          },
+          "ecoSpeed": {
+            "description": "Recommended, reduced speed to ensure high efficiency [km/h].\n\nRelevant for `range calculation`.\n",
+            "type": "integer",
+            "format": "int32"
+          },
+          "emissionStandard": {
+            "$ref": "#/components/schemas/EmissionStandard"
+          },
+          "power": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum available power of the vehicle [kW]."
+          },
+          "officialRange": {
+            "description": "The manufacturer given official range of the vehicle with this drive train [km].",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Battery": {
+        "type": "object",
+        "required": [
+          "totalCapacity",
+          "acChargingPower",
+          "dcChargingPower",
+          "plugs"
+        ],
+        "description": "Physical properties of the battery regarding capacity and charging. It is null for an unpowered vehicle.\n\nRelevant for `range calculation`.",
+        "properties": {
+          "totalCapacity": {
+            "type": "number",
+            "format": "double",
+            "description": "The total battery capacity [kWh]."
+          },
+          "acChargingPower": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Charging power AC [kW]."
+          },
+          "dcChargingPower": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Charging power DC [kW]."
+          },
+          "plugs": {
+            "description": "List of charging plugs the vehicle is compatible with.",
+            "type": "array",
+            "example": [
+              "CCS 2",
+              "Type 2"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "apiKey"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.myptv.com/data/v1"
+    }
+  ]
+}

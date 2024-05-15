@@ -1,0 +1,16 @@
+<?php
+
+namespace PTV\Data\Enums;
+
+enum FuelType: string
+{
+    case GASOLINE = "GASOLINE";
+    case DIESEL = "DIESEL";
+    case COMPRESSED_NATURAL_GAS = "COMPRESSED_NATURAL_GAS";
+    case LIQUEFIED_PETROLEUM_GAS = "LIQUEFIED_PETROLEUM_GAS";
+    case LIQUEFIED_NATURAL_GAS = "LIQUEFIED_NATURAL_GAS";
+    case CNG_GASOLINE = "CNG_GASOLINE";
+    case LPG_GASOLINE = "LPG_GASOLINE";
+    case ETHANOL = "ETHANOL";
+    case NONE = "NONE";
+}
