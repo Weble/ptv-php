@@ -1,5 +1,6 @@
 <?php
 
+use PTV\Data\DTO\VehicleProfile;
 use PTV\Data\PTVData;
 use PTV\Data\Requests\VehicleProfiles\GetPredefinedVehicleProfiles;
 use Saloon\Http\Faking\MockClient;
@@ -13,5 +14,8 @@ test('my test', function () {
     $connector = new PTVData($_ENV['PTV_API_KEY']);
     $connector->withMockClient($mockClient);
 
-    dd($connector->vehicleProfiles()->all());
+    $profiles = $connector->vehicleProfiles()->all();
+
+    expect($profiles)->toHaveCount(22);
+    expect($profiles)->each->toBeInstanceOf(VehicleProfile::class);
 });

@@ -9,7 +9,7 @@ use PTV\Data\Enums\FuelType;
 class Vehicle
 {
     public function __construct(
-        public readonly int              $bioFuelRatio,
+        public readonly ?float              $bioFuelRatio,
         public readonly string           $emissionStandard,
         public readonly int              $co2EmissionClass,
 
@@ -44,8 +44,8 @@ class Vehicle
 
         public readonly ?FuelType        $fuelType = null,
         public readonly ?ElectricityType $electricityType = null,
-        public readonly ?int              $averageFuelConsumption = null,
-        public readonly ?int              $averageElectricityConsumption = null,
+        public readonly ?float              $averageFuelConsumption = null,
+        public readonly ?float              $averageElectricityConsumption = null,
         public readonly ?int              $hybridRatio = null,
         public readonly ?int              $dualFuelRatio = null,
         public readonly ?int              $cylinderCapacity = null,

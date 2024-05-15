@@ -39,11 +39,11 @@ class GetPredefinedVehicleProfiles extends Request
                     name: $profile['name'],
                     description: $profile['description'],
                     region: Region::from($profile['region']),
-                    vehicle: $profile['vehicle'] ? new Vehicle(
+                    vehicle: isset($profile['vehicle']) ? new Vehicle(
                         ...array_merge($profile['vehicle'], [
-                            'engineType' => $profile['vehicle']['engineType'] ? EngineType::from($profile['vehicle']['engineType']) : null,
-                            'fuelType' => $profile['vehicle']['fuelType'] ? FuelType::from($profile['vehicle']['fuelType']) : null,
-                            'electricityType' => $profile['vehicle']['electricityType'] ? ElectricityType::from($profile['vehicle']['electricityType']) : null,
+                            'engineType' => isset($profile['vehicle']['engineType']) ? EngineType::from($profile['vehicle']['engineType']) : null,
+                            'fuelType' => isset($profile['vehicle']['fuelType']) ? FuelType::from($profile['vehicle']['fuelType']) : null,
+                            'electricityType' => isset($profile['vehicle']['electricityType']) ? ElectricityType::from($profile['vehicle']['electricityType']) : null,
                         ])
                     ) : null,
                     currency: $profile['currency'],
