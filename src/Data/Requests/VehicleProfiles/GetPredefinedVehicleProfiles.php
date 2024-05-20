@@ -34,7 +34,6 @@ class GetPredefinedVehicleProfiles extends Request
         $data = $response->json('profiles');
 
         return array_map(function (array $profile) {
-            try {
                 return new VehicleProfile(
                     name: $profile['name'],
                     description: $profile['description'],
@@ -50,9 +49,6 @@ class GetPredefinedVehicleProfiles extends Request
                     costPerKilometer: $profile['monetaryCostOptions']['costPerKilometer'],
                     workingCostPerHour: $profile['monetaryCostOptions']['workingCostPerHour'],
                 );
-            } catch (ValueError) {
-                dd($profile);
-            }
         }, $data);
     }
 }

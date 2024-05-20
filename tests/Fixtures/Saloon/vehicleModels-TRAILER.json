@@ -1,0 +1,13 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Mon, 20 May 2024 13:01:50 GMT",
+        "Content-Type": "application\/json",
+        "Content-Length": "20",
+        "Connection": "keep-alive",
+        "ptv-trace-id": "c3411ecd7a1d6b2a6517855dcb5a1808",
+        "ptv-region": "EU",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    },
+    "data": "{\"vehicleModels\":[]}"
+}
