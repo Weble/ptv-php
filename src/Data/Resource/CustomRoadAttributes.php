@@ -2,6 +2,7 @@
 
 namespace PTV\Data\Resource;
 
+use PTV\Data\Enums\PolylineFormat;
 use PTV\Data\Requests\CustomRoadAttributes\CreateCustomRoadAttributeScenario;
 use PTV\Data\Requests\CustomRoadAttributes\DeleteCustomRoadAttributeScenario;
 use PTV\Data\Requests\CustomRoadAttributes\GetAllCustomRoadAttributeScenarios;
@@ -15,11 +16,12 @@ class CustomRoadAttributes extends Resource
 {
 	/**
 	 * @param array $results Defines which results will be returned.
-	 * @param string $polylineFormat
+	 * @param PolylineFormat|null $polylineFormat
 	 */
-	public function getAllCustomRoadAttributeScenarios(?array $results, ?string $polylineFormat): Response
+	public function customRoadAttributeScenarios(?array $results = null, ?PolylineFormat $polylineFormat = null)
 	{
-		return $this->connector->send(new GetAllCustomRoadAttributeScenarios($results, $polylineFormat));
+        // TODO
+		return $this->connector->send(new GetAllCustomRoadAttributeScenarios($results, $polylineFormat))->dto();
 	}
 
 
@@ -29,6 +31,7 @@ class CustomRoadAttributes extends Resource
 	 */
 	public function createCustomRoadAttributeScenario(?array $results, ?string $polylineFormat): Response
 	{
+        // TODO
 		return $this->connector->send(new CreateCustomRoadAttributeScenario($results, $polylineFormat));
 	}
 
@@ -44,6 +47,7 @@ class CustomRoadAttributes extends Resource
 		?string $polylineFormat,
 	): Response
 	{
+        // TODO
 		return $this->connector->send(new GetCustomRoadAttributeScenario($scenarioId, $results, $polylineFormat));
 	}
 
@@ -59,6 +63,7 @@ class CustomRoadAttributes extends Resource
 		?string $polylineFormat,
 	): Response
 	{
+        // TODO
 		return $this->connector->send(new UpdateCustomRoadAttributeScenario($scenarioId, $results, $polylineFormat));
 	}
 
@@ -68,13 +73,14 @@ class CustomRoadAttributes extends Resource
 	 */
 	public function deleteCustomRoadAttributeScenario(string $scenarioId): Response
 	{
+        // TODO
 		return $this->connector->send(new DeleteCustomRoadAttributeScenario($scenarioId));
 	}
 
 
 	/**
-	 * @param string $polylineFormat
 	 * @param string $points A point or a polyline to select roads.
+     * @param string $polylineFormat
 	 *
 	 * For a single point the road closest to this point will be returned. Several points will be considered
 	 * a polyline and all roads intersected by this polyline will be returned. The polyline must not be closed,
@@ -88,8 +94,8 @@ class CustomRoadAttributes extends Resource
 	 * * contains invalid coordinates or
 	 * * covers more than 5000 roads.
 	 */
-	public function getRoads(?string $polylineFormat, string $points): Response
+	public function roads(string $points, ?PolylineFormat $polylineFormat = null): string
 	{
-		return $this->connector->send(new GetRoads($polylineFormat, $points));
+		return $this->connector->send(new GetRoads($points, $polylineFormat))->dto();
 	}
 }

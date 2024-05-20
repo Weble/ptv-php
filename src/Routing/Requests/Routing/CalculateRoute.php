@@ -3,8 +3,10 @@
 namespace PTV\Routing\Requests\Routing;
 
 use DateTime;
+use PTV\Routing\DTO\Route;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 /**
  * calculateRoute
@@ -14,7 +16,6 @@ use Saloon\Http\Request;
 class CalculateRoute extends Request
 {
 	protected Method $method = Method::GET;
-
 
 	public function resolveEndpoint(): string
 	{
@@ -208,4 +209,9 @@ class CalculateRoute extends Request
 			'results' => $this->results,
 		]);
 	}
+
+    public function createDtoFromResponse(Response $response): Route
+    {
+        return new Route(...$response->json());
+    }
 }

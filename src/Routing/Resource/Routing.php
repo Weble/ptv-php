@@ -2,6 +2,7 @@
 
 namespace PTV\Routing\Resource;
 
+use PTV\Routing\DTO\Route;
 use PTV\Routing\Requests\Routing\CalculateRoute;
 use PTV\Routing\Requests\Routing\CalculateRoutePost;
 use PTV\Routing\Requests\Routing\GetEstimatedTimeOfArrival;
@@ -181,9 +182,9 @@ class Routing extends Resource
 		?array $options = null,
 		?array $monetaryCostOptions = null,
 		?array $results = null,
-	): Response
+	): Route
 	{
-		return $this->connector->send(new CalculateRoute($waypoints, $routeId, $profile, $vehicle, $options, $monetaryCostOptions, $results));
+		return $this->connector->send(new CalculateRoute($waypoints, $routeId, $profile, $vehicle, $options, $monetaryCostOptions, $results))->dto();
 	}
 
 

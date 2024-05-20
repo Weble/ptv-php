@@ -1,0 +1,13 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Mon, 20 May 2024 16:10:52 GMT",
+        "Content-Type": "application\/json",
+        "Content-Length": "69",
+        "Connection": "keep-alive",
+        "ptv-trace-id": "f30b79f2e22928d94671d24df15b07a2",
+        "ptv-region": "EU",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    },
+    "data": "{\"distance\":8138,\"travelTime\":1729,\"trafficDelay\":0,\"violated\":false}"
+}

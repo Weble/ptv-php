@@ -3,8 +3,10 @@
 namespace PTV\Data\Requests\CustomRoadAttributes;
 
 use DateTime;
+use PTV\Data\Enums\PolylineFormat;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 /**
  * getRoads
@@ -39,14 +41,19 @@ class GetRoads extends Request
 	 * * covers more than 5000 roads.
 	 */
 	public function __construct(
-		protected ?string $polylineFormat = null,
-		protected string $points,
+        protected string $points,
+		protected ?PolylineFormat $polylineFormat = null,
 	) {
 	}
 
 
 	public function defaultQuery(): array
 	{
-		return array_filter(['polylineFormat' => $this->polylineFormat, 'points' => $this->points]);
+		return array_filter(['polylineFormat' => $this->polylineFormat?->value, 'points' => $this->points]);
 	}
+
+    public function createDtoFromResponse(Response $response): string
+    {
+        return $response->json('roads')['polyline'] ?? '';
+    }
 }

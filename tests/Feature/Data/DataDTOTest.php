@@ -5,6 +5,8 @@ use PTV\Data\DTO\VehicleModel;
 use PTV\Data\DTO\VehicleProfile;
 use PTV\Data\Enums\VehicleType;
 use PTV\Data\PTVData;
+use PTV\Data\Requests\CustomRoadAttributes\GetCustomRoadAttributeScenario;
+use PTV\Data\Requests\CustomRoadAttributes\GetRoads;
 use PTV\Data\Requests\MapInformation\GetMapInformation;
 use PTV\Data\Requests\VehicleModels\GetVehicleModels;
 use PTV\Data\Requests\VehicleProfiles\GetPredefinedVehicleProfiles;
@@ -86,4 +88,16 @@ test('get map information as DTO', function () {
 
     expect($models)->toHaveCount(342);
     expect($models)->each->toBeInstanceOf(MapInformation::class);
+});
+
+test('get roads information as DTO', function () {
+    $mockClient = new MockClient([
+        GetRoads::class => MockResponse::fixture('roads')
+    ]);
+    $connector = new PTVData($_ENV['PTV_API_KEY']);
+    $connector->withMockClient($mockClient);
+
+    $points = $connector->customRoadAttributes()->roads('6.626621368537682,35.493691935511414,18.520381599098922,47.09178374646217');
+
+    expect($points)->toBeString();
 });

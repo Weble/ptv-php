@@ -3,8 +3,10 @@
 namespace PTV\Data\Requests\CustomRoadAttributes;
 
 use DateTime;
+use PTV\Data\Enums\PolylineFormat;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 /**
  * getAllCustomRoadAttributeScenarios
@@ -24,11 +26,11 @@ class GetAllCustomRoadAttributeScenarios extends Request
 
 	/**
 	 * @param null|array $results Defines which results will be returned.
-	 * @param null|string $polylineFormat
+	 * @param null|PolylineFormat $polylineFormat
 	 */
 	public function __construct(
 		protected ?array $results = null,
-		protected ?string $polylineFormat = null,
+		protected ?PolylineFormat $polylineFormat = null,
 	) {
 	}
 
@@ -37,4 +39,9 @@ class GetAllCustomRoadAttributeScenarios extends Request
 	{
 		return array_filter(['results' => $this->results, 'polylineFormat' => $this->polylineFormat]);
 	}
+
+    public function createDtoFromResponse(Response $response): mixed
+    {
+        dd($response->json());
+    }
 }
