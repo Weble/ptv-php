@@ -63,16 +63,4 @@ class PTVRouting extends PTV
             headerName: 'apiKey'
         );
     }
-
-    public function handlePsrRequest(RequestInterface $request, PendingRequest $pendingRequest): RequestInterface
-    {
-        $existingQuery = URLHelper::parseQueryString($request->getUri()->getQuery());
-
-        // This is because APIs query params needs to be like 'param=value1&param=value2' instead of 'param[0]=value1&param[1]=value2'
-        return $request->withUri(
-            $request->getUri()->withQuery(
-                preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', http_build_query($existingQuery))
-            )
-        );
-    }
 }

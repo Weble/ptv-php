@@ -21,7 +21,8 @@
         }
     ],
     "require": {
-        "saloonphp/saloon": "^3.0"
+        "saloonphp/saloon": "^3.0",
+        "moneyphp/money": "^4.5"
     },
     "require-dev": {
         "pestphp/pest": "^2.34",
