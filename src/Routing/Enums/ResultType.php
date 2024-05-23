@@ -28,4 +28,6 @@ enum ResultType: string
     case TOLL_SYSTEMS = 'TOLL_SYSTEMS';
     // Response includes **events** when a toll road is entered, exited or a toll booth is passed.';
     case TOLL_EVENTS = 'TOLL_EVENTS';
+
+    // TODO: events, emissions, post operation related result types.
 }

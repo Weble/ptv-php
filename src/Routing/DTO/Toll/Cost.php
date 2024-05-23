@@ -1,10 +1,10 @@
 <?php
 
-namespace PTV\Routing\DTO;
+namespace PTV\Routing\DTO\Toll;
 
 use Money\Money;
 
-class TollCost
+class Cost
 {
     public function __construct(
         /** @var array<Money> */

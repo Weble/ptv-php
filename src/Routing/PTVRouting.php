@@ -2,15 +2,12 @@
 
 namespace PTV\Routing;
 
-use Psr\Http\Message\RequestInterface;
 use PTV\PTV;
 use PTV\Routing\Resource\ReachableAreas;
 use PTV\Routing\Resource\ReachableLocations;
 use PTV\Routing\Resource\Routing;
 use Saloon\Contracts\Authenticator;
-use Saloon\Helpers\URLHelper;
 use Saloon\Http\Auth\HeaderAuthenticator;
-use Saloon\Http\PendingRequest;
 
 /**
  * Routing

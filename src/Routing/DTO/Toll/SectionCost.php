@@ -1,12 +1,12 @@
 <?php
 
-namespace PTV\Routing\DTO;
+namespace PTV\Routing\DTO\Toll;
 
 use Money\Money;
 use PTV\Routing\Enums\EtcSubscriptionType;
 use PTV\Routing\Enums\PaymentMethod;
 
-class TollSectionCost
+class SectionCost
 {
     public function __construct(
 

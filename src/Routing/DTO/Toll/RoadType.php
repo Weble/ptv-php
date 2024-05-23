@@ -1,8 +1,8 @@
 <?php
 
-namespace PTV\Routing\DTO;
+namespace PTV\Routing\DTO\Toll;
 
-enum TollRoadType: string
+enum RoadType: string
 {
     case GENERAL = "GENERAL";
     case CITY = "CITY";

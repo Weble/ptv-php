@@ -1,6 +1,6 @@
 <?php
 
-namespace PTV\Routing\DTO;
+namespace PTV\Routing\DTO\Toll;
 
 use Money\Money;
 

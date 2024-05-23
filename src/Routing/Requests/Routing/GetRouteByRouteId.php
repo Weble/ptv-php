@@ -3,8 +3,11 @@
 namespace PTV\Routing\Requests\Routing;
 
 use DateTime;
+use PTV\Routing\DTO\Route;
+use RuntimeException;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 /**
  * getRouteByRouteId
@@ -16,14 +19,14 @@ use Saloon\Http\Request;
  */
 class GetRouteByRouteId extends Request
 {
-	protected Method $method = Method::GET;
+    use CreateRouteFromResponse;
 
+	protected Method $method = Method::GET;
 
 	public function resolveEndpoint(): string
 	{
 		return "/routes/{$this->routeId}";
 	}
-
 
 	/**
 	 * @param string $routeId The route ID returned from a previous route calculation or alternative route.
@@ -32,4 +35,15 @@ class GetRouteByRouteId extends Request
 		protected string $routeId,
 	) {
 	}
+
+    public function createDtoFromResponse(Response $response): Route
+    {
+        if (!$response->successful()) {
+            $errors = $response->json();
+
+            throw new RuntimeException(json_encode($errors), $response->status());
+        }
+
+        return $this->parseRoute($response->json());
+    }
 }
