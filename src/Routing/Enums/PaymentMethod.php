@@ -1,0 +1,11 @@
+<?php
+
+namespace PTV\Routing\Enums;
+
+enum PaymentMethod: string
+{
+    case ELECTRONIC_TOLL_COLLECTION_SUBSCRIPTION = "ELECTRONIC_TOLL_COLLECTION_SUBSCRIPTION";
+    case ELECTRONIC_TOLL_COLLECTION = "ELECTRONIC_TOLL_COLLECTION";
+    case CASH = "CASH";
+    case CREDIT_CARD = "CREDIT_CARD";
+}

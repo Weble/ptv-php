@@ -4,7 +4,7 @@ namespace PTV\Routing\DTO;
 
 use Money\Money;
 
-class TollCosts
+class TollCost
 {
     public function __construct(
         /** @var array<Money> */

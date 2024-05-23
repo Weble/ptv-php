@@ -25,6 +25,8 @@ test('Routing Test', function (array $waypoints) {
             ResultType::LEGS_POLYLINE,
             ResultType::ROUTE_ID,
             ResultType::TOLL_COSTS,
+            ResultType::TOLL_SYSTEMS,
+            ResultType::TOLL_SECTIONS,
         ])
         ->calculateRoute(
         $waypoints

@@ -5,6 +5,8 @@ namespace PTV\Routing\Requests\Routing;
 use DateTimeImmutable;
 use Money\Currency;
 use Money\Money;
+use PTV\Data\DTO\TariffVersion;
+use PTV\Data\DTO\TollSystem;
 use PTV\Routing\DTO\CountryPrice;
 use PTV\Routing\DTO\Currencies;
 use PTV\Routing\DTO\ExchangeRate;
@@ -12,7 +14,12 @@ use PTV\Routing\DTO\Leg;
 use PTV\Routing\DTO\MonetaryCosts;
 use PTV\Routing\DTO\Route;
 use PTV\Routing\DTO\Toll;
-use PTV\Routing\DTO\TollCosts;
+use PTV\Routing\DTO\TollCost;
+use PTV\Routing\DTO\TollRoadType;
+use PTV\Routing\DTO\TollSection;
+use PTV\Routing\DTO\TollSectionCost;
+use PTV\Routing\Enums\EtcSubscriptionType;
+use PTV\Routing\Enums\PaymentMethod;
 use RuntimeException;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -230,27 +237,28 @@ class CalculateRoute extends Request
         }
 
         $data = $response->json();
+        //dd($data);
 
         return new Route(
             leg: $this->parseLeg($data),
             routeId: $data['routeId'] ?? null,
             legs: isset($data['legs']) ? array_map(fn(array $leg): Leg => $this->parseLeg($leg), $data['legs']) : null,
             toll: isset($data['toll']) ? new Toll(
-                costs: new TollCosts(
+                costs: isset($data['toll']['costs']) ? new TollCost(
                     prices: array_map(
                         fn(array $price): Money => $this->parseMoney($price['price'], new Currency($price['currency'])),
                         $data['toll']['costs']['prices']
                     ),
                     convertedPrice: $this->parseMoney($data['toll']['costs']['convertedPrice']['price'], new Currency($data['toll']['costs']['convertedPrice']['currency'])),
-                    countries:  array_map(
+                    countries: array_map(
                         fn(array $country): CountryPrice => new CountryPrice(
                             code: $country['countryCode'],
                             price: $this->parseMoney($country['price']['price'], new Currency($country['price']['currency']))
                         ),
                         $data['toll']['costs']['countries']
                     )
-                ),
-                currencies: new Currencies(
+                ) : null,
+                currencies: isset($data['toll']['currencies']) ? new Currencies(
                     date: DateTimeImmutable::createFromFormat('Y-m-d', $data['toll']['currencies']['date']),
                     provider: $data['toll']['currencies']['provider'],
                     baseCurrency: new Currency($data['toll']['currencies']['baseCurrency']),
@@ -260,7 +268,31 @@ class CalculateRoute extends Request
                             rate: $rate['rate'],
                         ),
                         $data['toll']['currencies']['exchangeRates'])
-                )
+                ) : null,
+                systems: isset($data['toll']['systems']) ? array_map(fn(array $system): TollSystem => new TollSystem(
+                    name: $system['name'],
+                    operator: $system['operatorName'],
+                    tariffVersions: [
+                        new TariffVersion(
+                            version: $system['tariffVersion'],
+                            validFrom: DateTimeImmutable::createFromFormat("Y-m-d\TH:i:s.v\Z", $system['tariffVersionValidFrom'])
+                        )
+                    ]
+                ), $data['toll']['systems']) : null,
+                sections: isset($data['toll']['sections']) ? array_map(fn(array $section): TollSection => new TollSection(
+                    costs: array_map(fn(array $cost): TollSectionCost => new TollSectionCost(
+                        price: $this->parseMoney($cost['price'], new Currency($cost['price'])),
+                        paymentMethods: array_map(fn(string $method): PaymentMethod => PaymentMethod::from($method), $cost['paymentMethods']),
+                        etcSubscriptions: array_map(fn(string $sub): EtcSubscriptionType => EtcSubscriptionType::from($sub), $cost['etcSubscriptions']),
+                        convertedPrice: $this->parseMoney($cost['convertedPrice']['price'], new Currency($cost['convertedPrice']['currency'])),
+                    ), $section['costs']),
+                    tollRoadType: TollRoadType::from($section['tollRoadType']),
+                    tollSystemIndex: $section['tollSystemIndex'],
+                    countryCode: $section['countryCode'],
+                    displayName: $section['displayName'],
+                    calculatedDistance: $section['calculatedDistance']
+
+                ), $data['toll']['sections']) : null,
             ) : null,
             events: $data['events'] ?? null,
             emissions: $data['emissions'] ?? null,
