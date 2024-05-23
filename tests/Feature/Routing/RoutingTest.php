@@ -3,20 +3,23 @@
 use PTV\Routing\DTO\Leg;
 use PTV\Routing\DTO\MonetaryCosts;
 use PTV\Routing\DTO\Route;
+use PTV\Routing\DTO\Vehicle;
 use PTV\Routing\Enums\ResultType;
 use PTV\Routing\PTVRouting;
 use PTV\Routing\Requests\Routing\CalculateRoute;
+use PTV\Routing\Requests\Routing\GetRouteByRouteId;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 test('Routing Test', function (array $waypoints, array $resultTypes) {
     $cacheKey = implode(",", $waypoints) . '-' . implode(",", array_map(fn(ResultType $type) => $type->value, $resultTypes));
     $mockClient = new MockClient([
-        CalculateRoute::class => MockResponse::fixture('calculateRoute-'. $cacheKey)
+        CalculateRoute::class => MockResponse::fixture('calculateRoute-'. $cacheKey),
+        GetRouteByRouteId::class => MockResponse::fixture('getRouteByRouteId-'. $cacheKey),
     ]);
 
     $connector = new PTVRouting($_ENV['PTV_API_KEY']);
-    //$connector->withMockClient($mockClient);
+    $connector->withMockClient($mockClient);
 
     $route = $connector
         ->route()
@@ -31,6 +34,7 @@ test('Routing Test', function (array $waypoints, array $resultTypes) {
 
     $alternativeRoute = $connector
         ->route()
+        ->forVehicle(new Vehicle())
         ->return([
             ResultType::MONETARY_COSTS
         ])
