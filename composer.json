@@ -21,6 +21,7 @@
         }
     ],
     "require": {
+        "php": "^8.2",
         "saloonphp/saloon": "^3.0",
         "moneyphp/money": "^4.5"
     },

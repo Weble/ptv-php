@@ -1,4 +1,9 @@
-# PTV API - PHP SDK
+# PHP SDK for the PTV APIs
+
+[![Latest Version](https://img.shields.io/github/release/weble/ptv-php.svg?style=flat-square)](https://github.com/weble/ptv-php/releases)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![run-tests](https://img.shields.io/github/actions/workflow/status/spatie/browsershot/run-tests.yml?label=tests&style=flat-square)](https://github.com/spatie/browsershot/actions)
+[![Total Downloads](https://img.shields.io/packagist/dt/weble/ptv-php.svg?style=flat-square)](https://packagist.org/packages/weble/ptv-php)
 
 This is an SDK for the [PTV API](https://developer.myptv.com/en).
 
