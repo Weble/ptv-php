@@ -8,6 +8,7 @@ use Money\Money;
 use PTV\Data\DTO\TariffVersion;
 use PTV\Data\DTO\TollSystem;
 use PTV\Routing\DTO\Currencies;
+use PTV\Routing\DTO\Emission;
 use PTV\Routing\DTO\ExchangeRate;
 use PTV\Routing\DTO\Leg;
 use PTV\Routing\DTO\MonetaryCosts;
@@ -20,6 +21,7 @@ use PTV\Routing\DTO\Toll\RoadType;
 use PTV\Routing\DTO\Toll\Section;
 use PTV\Routing\DTO\Toll\SectionCost;
 use PTV\Routing\DTO\Toll\Toll;
+use PTV\Routing\Enums\EmissionType;
 use PTV\Routing\Enums\EtcSubscriptionType;
 use PTV\Routing\Enums\PaymentMethod;
 
@@ -33,7 +35,7 @@ trait CreateRouteFromResponse
             legs: isset($data['legs']) ? array_map(fn(array $leg): Leg => $this->parseLeg($leg), $data['legs']) : null,
             toll: isset($data['toll']) ? $this->parseToll($data) : null,
             events: $data['events'] ?? null,
-            emissions: $data['emissions'] ?? null,
+            emissions: isset($data['emissions']) ? $this->parseEmissions($data['emissions']) : null,
             alternativeRoutes: isset($data['alternativeRoutes']) ? array_map(fn(array $route): Route => $this->parseRoute($route), $data['alternativeRoutes']) : null,
             scheduleReport: $data['scheduleReport'] ?? null,
             evReport: $data['evReport'] ?? null,
@@ -164,6 +166,23 @@ trait CreateRouteFromResponse
                 $costs['countries']
             )
         );
+    }
+
+    private function parseEmissions(array $emissions): array
+    {
+        foreach ($emissions as $type => $emission) {
+            $emissions[$type] = new Emission(
+                type: EmissionType::from($type),
+                fuelConsumption: $emission['fuelConsumption'] ?? null,
+                electricityConsumption: $emission['electricityConsumption'] ?? null,
+                co2eTankToWheel: $emission['co2eTankToWheel'] ?? null,
+                co2eWellToWheel: $emission['co2eWellToWheel'] ?? null,
+                energyUseTankToWheel: $emission['energyUseTankToWheel'] ?? null,
+                energyUseWellToWheel: $emission['energyUseWellToWheel'] ?? null,
+            );
+        }
+
+        return array_values($emissions);
     }
 
 }

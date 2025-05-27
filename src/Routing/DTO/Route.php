@@ -4,6 +4,7 @@ namespace PTV\Routing\DTO;
 
 use PTV\Routing\DTO\Toll\Event;
 use PTV\Routing\DTO\Toll\Toll;
+use PTV\Routing\DTO\Emission;
 
 class Route
 {
@@ -15,6 +16,7 @@ class Route
         public readonly ?Toll          $toll = null,
         /** @var array<Event>|null */
         public readonly ?array         $events = null,
+        /** @var array<Emission>|null */
         public readonly ?array         $emissions = null,
         /** @var array<Route>|null */
         public readonly ?array         $alternativeRoutes = null,

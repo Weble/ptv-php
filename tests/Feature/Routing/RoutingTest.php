@@ -66,6 +66,7 @@ test('Routing Test', function (array $waypoints, array $resultTypes) {
             ResultType::TOLL_SECTIONS,
             ResultType::TOLL_EVENTS,
             ResultType::ALTERNATIVE_ROUTES,
+            ResultType::EMISSIONS_ISO14083_2023_DEFAULT_CONSUMPTION
             // ResultType::GUIDED_NAVIGATION,
         ],
     ],
